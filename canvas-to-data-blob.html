@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic Image Loading</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<!-- 	 <script src='./resources/app.js'></script>
+    <link rel='stylesheet' type='text/css' href='./resources/style.css'> -->
+	<style type='text/css'>
+	   
+	
+	</style>
+</head>
+<body>
+	<!-- <img id="originalGif" src="https://media.giphy.com/media/3ohhwmcrvnu7OzD1mM/giphy.gif"> -->
+
+</body>
+
+<script>
+
+function toDataURL(src, callback, outputFormat) {
+  var img = new Image();
+  img.crossOrigin = 'Anonymous';
+  img.onload = function() {
+    var canvas = document.createElement('CANVAS');
+    var ctx = canvas.getContext('2d');
+    var dataURL;
+    canvas.height = this.naturalHeight;
+    canvas.width = this.naturalWidth;
+    ctx.drawImage(this, 0, 0);
+    dataURL = canvas.toDataURL(outputFormat);
+    callback(dataURL);
+  };
+  img.src = src;
+  if (img.complete || img.complete === undefined) {
+    img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+    img.src = src;
+  }
+}
+
+toDataURL(
+  'https://media.giphy.com/media/3ohhwmcrvnu7OzD1mM/giphy.gif',
+  function(dataUrl) {
+    console.log('RESULT:', dataUrl)
+  }
+)
+
+
+</script>
+</html>

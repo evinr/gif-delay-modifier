@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic Image Loading</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+<!-- 	 <script src='./resources/app.js'></script>
+    <link rel='stylesheet' type='text/css' href='./resources/style.css'> -->
+	<style type='text/css'>
+	   
+	
+	</style>
+</head>
+<body>
+	<!-- <img id="originalGif" src="https://media.giphy.com/media/3ohhwmcrvnu7OzD1mM/giphy.gif"> -->
+
+</body>
+
+<script>
+
+	// Function to grab the data via XHR
+	const toDataURL = url => fetch(url)
+		.then(response => response.blob())
+		.then(blob => new Promise((resolve, reject) => {
+		const reader = new FileReader()
+		reader.onloadend = () => resolve(reader.result)
+		reader.onerror = reject
+		reader.readAsDataURL(blob)
+	}))
+
+	toDataURL('https://media.giphy.com/media/3ohhwmcrvnu7OzD1mM/giphy.gif')
+		.then(dataUrl => {
+			// console.log('RESULT:', dataUrl)
+			var img = new Image();
+			img.src = dataUrl;
+			document.body.appendChild(img);
+		})
+
+
+
+</script>
+</html>
